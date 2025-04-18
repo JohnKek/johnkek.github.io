@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .heart {
+            position: relative;
+            width: 300px;
+            height: 270px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: heartbeat 1.5s infinite;
+        }
+        .heart:before, .heart:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 240px;
+            background: #ff0000;
+            border-radius: 150px 150px 0 0;
+        }
+        .heart:before {
+            left: 150px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        .question-mark {
+            position: relative;
+            z-index: 1;
+            font-size: 120px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.1); opacity: 0.9; }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart">
+        <div class="question-mark">?</div>
+    </div>
+
+    <script>
+        // Установите ваш URL для редиректа ниже
+        const redirectUrl = "https://www.youtube.com/watch?v=CfihYWRWRTQ"; // ЗАМЕНИТЕ ЭТО НА ВАШ URL
+        
+        setTimeout(() => {
+            window.location.href = redirectUrl;
+        }, 2000); // 2000 мс = 2 секунды
+    </script>
+</body>
+</html>
