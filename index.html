@@ -14,6 +14,29 @@
             background-color: #000;
             font-family: Arial, sans-serif;
             overflow: hidden;
+            color: white;
+            text-align: center;
+            flex-direction: column;
+        }
+        .text-container {
+            font-size: 24px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .text-line {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            margin: 5px 0;
+        }
+        .text-line.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .heart {
             position: relative;
@@ -23,6 +46,12 @@
             justify-content: center;
             align-items: center;
             animation: heartbeat 1.5s infinite;
+            opacity: 0;
+            transition: opacity 1s;
+            margin-top: 40px; /* Добавил отступ сверху */
+        }
+        .heart.visible {
+            opacity: 1;
         }
         .heart:before, .heart:after {
             content: "";
@@ -66,17 +95,54 @@
     </style>
 </head>
 <body>
-    <div class="heart">
-        <div class="question-mark">?</div>
-    </div>
+<div class="text-container" id="textContainer"></div>
+<div class="heart" id="heart">
+    <div class="question-mark">?</div>
+</div>
 
-    <script>
-        // Установите ваш URL для редиректа ниже
-        const redirectUrl = "https://www.youtube.com/watch?v=CfihYWRWRTQ"; // ЗАМЕНИТЕ ЭТО НА ВАШ URL
+<script>
+    const redirectUrl = "https://www.youtube.com/watch?v=CfihYWRWRTQ"; // ЗАМЕНИТЕ ЭТО НА ВАШ URL
+    const lines = [
+        "Ничего.",
+        "Я первым подойду.",
+        "Перед счастьем надо ли гордиться?!",
+        "Спи спокойно.",
+        "Завтра я найду",
+        "Славный способ снова помириться!"
+    ];
+    const textContainer = document.getElementById('textContainer');
+    const heart = document.getElementById('heart');
 
+    // Показываем строки по очереди
+    function showLines() {
+        lines.forEach((line, index) => {
+            setTimeout(() => {
+                const lineElement = document.createElement('div');
+                lineElement.className = 'text-line';
+                lineElement.textContent = line;
+                textContainer.appendChild(lineElement);
+
+                // Через небольшой интервал делаем видимым
+                setTimeout(() => {
+                    lineElement.classList.add('visible');
+                }, 100);
+
+            }, index * 1000); // Каждая строка появляется через 1 секунду
+        });
+
+        // После всех строк показываем сердце
         setTimeout(() => {
-            window.location.href = redirectUrl;
-        }, 2000); // 2000 мс = 2 секунды
-    </script>
+            heart.classList.add('visible');
+
+            // Через 2 секунды после появления сердца - редирект
+            setTimeout(() => {
+                window.location.href = redirectUrl;
+            }, 2000);
+        }, lines.length * 1000 + 500);
+    }
+
+    // Запускаем процесс
+    showLines();
+</script>
 </body>
 </html>
